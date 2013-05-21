@@ -2,8 +2,10 @@ require 'base64'
 require 'openssl'
 
 module Nobi
-  BadSignature = Class.new(StandardError)
-  SignatureExpired = Class.new(StandardError)
+  BadData = Class.new(StandardError)
+  BadSignature = Class.new(BadData)
+  SignatureExpired = Class.new(BadData)
+  BadTimeSignature = Class.new(BadSignature)
 
   module Utils
     def self.base64_encode(string)

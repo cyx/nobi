@@ -38,8 +38,12 @@ scope do
     assert_equal 'bar', ts.unsign(ts.sign('bar'))
   end
 
-  test 'sign + unsign an int' do |ts|
-    assert_equal '1', ts.unsign(ts.sign(1))
+  test 'sign with no timestamp + unsign with timestamp' do |ts|
+    s = Nobi::Signer.new('foo')
+
+    assert_raise Nobi::BadTimeSignature do
+      ts.unsign(s.sign('bar'))
+    end
   end
 
   test 'unsign return_ timestamp' do |ts|
