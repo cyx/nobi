@@ -11,7 +11,9 @@ scope do
   end
 
   test 'sign + unsign an int' do |s|
-    assert_equal '1', s.unsign(s.sign(1))
+    assert_raise TypeError do
+      s.sign(1)
+    end
   end
 
   test 'no signature' do |s|

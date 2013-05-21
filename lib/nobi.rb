@@ -80,7 +80,7 @@ module Nobi
     end
 
     def sign(value)
-      '%s%s%s' % [value, @sep, get_signature(value.to_s)]
+      '%s%s%s' % [value, @sep, get_signature(value)]
     end
 
     def unsign(value)
