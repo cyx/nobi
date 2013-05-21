@@ -28,13 +28,9 @@ module Nobi
     end
 
     def self.bytes_to_int(bytes)
-      res = 0
-
-      bytes.each_byte do |e|
-        res = res << 8 | e
+      bytes.each_byte.inject(0) do |acc, byte|
+        acc << 8 | byte
       end
-
-      return res
     end
 
     def self.constant_time_compare(val1, val2)
