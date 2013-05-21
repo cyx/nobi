@@ -9,7 +9,7 @@ module Nobi
 
   module Utils
     def self.base64_encode(string)
-      Base64.urlsafe_encode64(string).gsub(/^=+|=+$/, '')
+      Base64.urlsafe_encode64(string).gsub(/=+$/, '')
     end
 
     def self.base64_decode(string)
