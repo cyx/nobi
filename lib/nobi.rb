@@ -69,7 +69,7 @@ module Nobi
 
   class Signer
     def initialize(secret,
-      salt: 'itsdangerous.Signer',
+      salt: 'nobi.Signer',
       sep: '.',
       digest_method: 'sha1')
 
