@@ -58,7 +58,7 @@ module Nobi
       @digest_method = digest_method
     end
 
-    def get_signature(key, value)
+    def signature(key, value)
       OpenSSL::HMAC.digest(@digest_method, key, value)
     end
   end
@@ -76,7 +76,7 @@ module Nobi
     end
 
     def sign(value)
-      '%s%s%s' % [value, @sep, get_signature(value)]
+      '%s%s%s' % [value, @sep, signature(value)]
     end
 
     def unsign(value)
@@ -86,7 +86,7 @@ module Nobi
 
       value, sig = Utils.rsplit(value, @sep)
 
-      if Utils.constant_time_compare(sig, get_signature(value))
+      if Utils.constant_time_compare(sig, signature(value))
         return value
       end
 
@@ -94,12 +94,12 @@ module Nobi
     end
 
     def derive_key
-      @algorithm.get_signature(@secret, @salt)
+      @algorithm.signature(@secret, @salt)
     end
 
-    def get_signature(value)
+    def signature(value)
       key = derive_key
-      sig = @algorithm.get_signature(key, value)
+      sig = @algorithm.signature(key, value)
 
       Utils.base64_encode(sig)
     end
@@ -121,7 +121,7 @@ module Nobi
       timestamp = Utils.base64_encode(Utils.int_to_bytes(get_timestamp.to_i))
       value = '%s%s%s' % [value, @sep, timestamp]
 
-      '%s%s%s' % [value, @sep, get_signature(value)]
+      '%s%s%s' % [value, @sep, signature(value)]
     end
 
     def unsign(value, max_age: nil, return_timestamp: nil)
