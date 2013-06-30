@@ -1,6 +1,12 @@
 nobi
 ====
 
+Requirements
+------------
+
+- Ruby 2.0
+
+
 Ruby port of [itsdangerous][itsdangerous] python signer.
 
 [itsdangerous]: http://pythonhosted.org/itsdangerous/
