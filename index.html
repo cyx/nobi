@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Nobi by cyx</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Nobi</h1>
+        <p></p>
+
+        <p class="view"><a href="https://github.com/cyx/nobi">View the Project on GitHub <small>cyx/nobi</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/cyx/nobi/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/cyx/nobi/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/cyx/nobi">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="nobi" class="anchor" href="#nobi"><span class="octicon octicon-link"></span></a>nobi</h1>
+
+<h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<ul>
+<li>Ruby 2.0</li>
+</ul><p>Ruby port of <a href="http://pythonhosted.org/itsdangerous/">itsdangerous</a> python signer.</p>
+
+<h2>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h2>
+
+<p>Best two usecases:</p>
+
+<ol>
+<li>Creating an activation link for users</li>
+<li>Creating a password reset link</li>
+</ol><h2>
+<a name="creating-an-activation-link-for-users" class="anchor" href="#creating-an-activation-link-for-users"><span class="octicon octicon-link"></span></a>Creating an activation link for users</h2>
+
+<div class="highlight highlight-ruby"><pre><span class="n">signer</span> <span class="o">=</span> <span class="no">Nobi</span><span class="o">::</span><span class="no">Signer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">'my secret'</span><span class="p">)</span>
+
+<span class="c1"># Let's say the user's ID is 101</span>
+<span class="n">signed</span> <span class="o">=</span> <span class="n">signer</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="s1">'101'</span><span class="p">)</span>
+
+<span class="c1"># You can now email this url to your users!</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">"http://yoursite.com/activate/?key=%s"</span> <span class="o">%</span> <span class="n">signed</span>
+</pre></div>
+
+<h2>
+<a name="creating-a-password-reset-link" class="anchor" href="#creating-a-password-reset-link"><span class="octicon octicon-link"></span></a>Creating a password reset link</h2>
+
+<div class="highlight highlight-ruby"><pre><span class="n">signer</span> <span class="o">=</span> <span class="no">Nobi</span><span class="o">::</span><span class="no">TimestampSigner</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">'my secret'</span><span class="p">)</span>
+
+<span class="c1"># Let's say the user's ID is 101</span>
+<span class="n">signed</span> <span class="o">=</span> <span class="n">signer</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="s1">'101'</span><span class="p">)</span>
+
+<span class="c1"># You can now email this url to your users!</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">"http://yoursite.com/password-reset/?key=%s"</span> <span class="o">%</span> <span class="n">signed</span>
+
+<span class="c1"># In your code, you can verify the expiration:</span>
+<span class="n">signer</span><span class="o">.</span><span class="n">unsign</span><span class="p">(</span><span class="n">signed</span><span class="p">,</span> <span class="n">max_age</span><span class="p">:</span> <span class="mi">86400</span><span class="p">)</span> <span class="c1"># 1 day expiration</span>
+</pre></div>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>As usual, you can install it using rubygems.</p>
+
+<pre><code>$ gem install nobi
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/cyx">cyx</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
